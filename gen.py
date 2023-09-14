@@ -12,7 +12,7 @@ if fl is not None:
      df=pd.read_csv(filename, encoding = "ISO-8859-1")
 else:
      os.chdir(r"C:\Users\genesis.villagracia\Downloads")
-    df = pd.read_csv("Sample - Superstore.xlsx", encoding = "ISO-8859-1")
+    df = pd.read_xlsx("Sample - Superstore.xlsx", encoding = "ISO-8859-1")
 
 
 
