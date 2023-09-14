@@ -1,8 +1,12 @@
 import streamlit as st
-st.title('Filipino Comicz') 
+import plotly.express as px
+import panda as pd
+import os 
+import warnings
+warnings.filterwanings('ignore')
+st.title('Super Store') 
 st.text_input('Search')
-st.header('Lastik Man (Ruber man)')
-st.text('A Filipino superhero that has the capability of a ruber.')
-st.text('He can stretch like a ruber, bounce like a ruber and transform')
-st.text('like a ruber. It was writen by Mars Ravelo who gained famous ')
+
+st.set_page_config(page_title="Superstore!",page_icon=":bar_chart:",layout="wide")
+
 
