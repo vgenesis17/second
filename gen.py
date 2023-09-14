@@ -1,4 +1,4 @@
-import streamlit as st
+import streamlit 
 streamlit.title('Filipino Comicz') 
 st.text_input('Search')
 streamlit.header('Lastik Man (Ruber man)')
