@@ -1,8 +1,8 @@
-import streamlit 
-streamlit.title('Filipino Comicz') 
-streamlit.text_input('Search')
-streamlit.header('Lastik Man (Ruber man)')
-streamlit.text('A Filipino superhero that has the capability of a ruber.')
-streamlit.text('He can stretch like a ruber, bounce like a ruber and transform')
-streamlit.text('like a ruber. It was writen by Mars Ravelo who gained famous ')
+import streamlit as st
+st.title('Filipino Comicz') 
+st.text_input('Search')
+st.header('Lastik Man (Ruber man)')
+st.text('A Filipino superhero that has the capability of a ruber.')
+st.text('He can stretch like a ruber, bounce like a ruber and transform')
+st.text('like a ruber. It was writen by Mars Ravelo who gained famous ')
 
