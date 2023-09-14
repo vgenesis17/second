@@ -19,4 +19,4 @@ with col1:
      date1 = pd.to_datetime(st.date_input("Start Date", StartDate))
 with col2:
      date2 = pd.to_datetime(st.date_input("End Date", EndDate))
-df = df[(df["Order Date"] >= date1) & (df["Order Date"] <= date2)
+df = df[(df["Order Date"] >= date1) & (df["Order Date"] <= date2)].copy()
