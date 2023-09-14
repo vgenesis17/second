@@ -1,3 +1,3 @@
 import streamlit as st
-st.write("""FilComicz"")
+streamlit.title('Filipino Comicz') 
 
