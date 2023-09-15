@@ -15,21 +15,21 @@ fl = st.file_uploader(":file_folder: Upload a file", type=(["csv","txt","xlsx","
 if fl is not None:
     filename = fl.name
     st.write(filename)
-    df = pd.read_xlsx(filename)
+    st.dataframe = pd.read_xlsx(filename)
 else:
     os.chdir(r"C:\Users\genesis.villagracia\Downloads")
-    df = pd.read_xlsx("Sample - Superstore.xlsx")
+    st.dataframe = pd.read_xlsx("Sample - Superstore.xlsx")
 
 
 #Defines Columns  
 col1,col2 = st.columns (2)
-df["Order_Date"] = pd.to_datetime(df["Order Date"])
+st.dataframe["Order_Date"] = pd.to_datetime(st.dataframe["Order Date"])
 
 
 
 #getting max and min date in this column
-startDate = pd.to_datetime(df["Order Date"]).min()
-endDate = pd.to_datetime(df["Order Date"]).max()
+startDate = pd.to_datetime(st.dataframe["Order Date"]).min()
+endDate = pd.to_datetime(st.dataframe["Order Date"]).max()
 #DisplayToColumns
 
 with col1:
@@ -37,7 +37,7 @@ with col1:
 with col2:
      date2 = pd.to_datetime(st.date_input("End Date", endDate))
     
-df = df[(df["Order Date"] >= date1) & (df["Order Date"] <= date2)].copy()
+st.dataframe = st.dataframe[(st.dataframe["Order Date"] >= date1) & (st.dataframe["Order Date"] <= date2)].copy()
 
 
 
