@@ -1,47 +1,69 @@
 import streamlit as st
 import pandas as pd
-import os 
-import warnings
+import matplotlib.pyplot as plt
+import seaborn as sns
 
-# Ignore warnings
-warnings.filterwarnings("ignore")
+# Title for your Streamlit app
+st.title('Data Manipulation and Visualization with Streamlit')
 
-st.title(':bar_chart: Super Store') 
-st.markdown('<style>div.block-container{padding-top:1rem;}</style>', unsafe_allow_html=True)
+# Upload a CSV file
+uploaded_file = st.file_uploader("Upload a CSV file", type=["csv"])
 
-# File upload
-fl = st.file_uploader(":file_folder: Upload a file", type=(["csv","txt","xlsx","xls"]))
+# Check if a file is uploaded
+if uploaded_file is not None:
+    # Load the data into a DataFrame
+    df = pd.read_csv(uploaded_file)
 
-#if fl is not None:
-   #filename = fl.name
-    #st.write(filename)
-    #st.dataframe = pd.read_xlsx(filename)
-#else:
-   #os.chdir(r"C:\Users\genesis.villagracia\Downloads")
-  # st.dataframe = pd.read_xlsx("Sample - Superstore.xlsx")
+    # Display the raw data
+    st.subheader("Raw Data")
+    st.write(df)
 
+    # Data manipulation
+    st.subheader("Data Manipulation")
 
-#Defines Columns  
-#col1,col2 = st.columns (2)
-#st.dataframe["Order_Date"] = pd.to_datetime(st.dataframe["Order Date"])
+    # Select columns for manipulation
+    selected_columns = st.multiselect("Select Columns", df.columns)
 
+    if selected_columns:
+        # Filter the DataFrame based on selected columns
+        filtered_df = df[selected_columns]
 
+        # Display the filtered data
+        st.write(filtered_df)
 
-#getting max and min date in this column
-#startDate = pd.to_datetime(st.dataframe["Order Date"]).min()
-#endDate = pd.to_datetime(st.dataframe["Order Date"]).max()
-#DisplayToColumns
+        # Calculate summary statistics
+        st.subheader("Summary Statistics")
+        st.write(filtered_df.describe())
 
-#with col1:
-     #date1 = pd.to_datetime(st.date_input("Start Date", startDate))
-#with col2:
-     #date2 = pd.to_datetime(st.date_input("End Date", endDate))
-    
-#st.dataframe = st.dataframe[(st.dataframe["Order Date"] >= date1) & (st.dataframe["Order Date"] <= date2)].copy()
+        # Data visualization
+        st.subheader("Data Visualization")
 
+        # Choose a type of chart
+        chart_type = st.selectbox("Select a Chart Type", ["Bar Chart", "Histogram"])
 
+        if chart_type == "Bar Chart":
+            # Group data by one of the selected columns and count occurrences
+            group_column = st.selectbox("Select a Column for Grouping", selected_columns)
+            if group_column:
+                chart_data = filtered_df[group_column].value_counts()
+                st.bar_chart(chart_data)
 
+        elif chart_type == "Histogram":
+            # Select a column for the histogram
+            hist_column = st.selectbox("Select a Column for Histogram", selected_columns)
+            if hist_column:
+                st.set_option('deprecation.showPyplotGlobalUse', False)
+                sns.histplot(filtered_df[hist_column], kde=True)
+                plt.xlabel(hist_column)
+                plt.ylabel("Frequency")
+                st.pyplot()
 
+# Add some explanation or instructions
+st.markdown("### Instructions:")
+st.markdown("- Upload a CSV file.")
+st.markdown("- Select columns for manipulation.")
+st.markdown("- Choose a chart type for visualization.")
 
-
+# Footer
+st.text("Sample Streamlit App for Data Manipulation and Visualization")
 
