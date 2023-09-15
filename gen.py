@@ -59,10 +59,10 @@ if uploaded_file is not None:
                 st.pyplot()
 
 # Add some explanation or instructions
-st.markdown("### Instructions:")
-st.markdown("- Upload a CSV file.")
-st.markdown("- Select columns for manipulation.")
-st.markdown("- Choose a chart type for visualization.")
+#st.markdown("### Instructions:")
+#st.markdown(""C:\Users\genesis.villagracia\Downloads\veg_plant_height.csv"")
+#st.markdown("plant_name")
+#st.markdown("- Choose a chart type for visualization.")
 
 # Footer
 st.text("Sample Streamlit App for Data Manipulation and Visualization")
