@@ -5,7 +5,7 @@ import plotly.express as px
 # Load data from a CSV file (place your data in the 'data/' directory)
 @st.cache  # Cache the loaded data to improve performance
 def load_data():
-    data = pd.read_csv("data/sample_data.csv")  # Adjust the file name as needed
+    data = pd.read_csv("veg_plant_height.csv")  # Adjust the file name as needed
     return data
 
 # Create a Streamlit app
