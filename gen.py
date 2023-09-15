@@ -1,69 +1,45 @@
 import streamlit as st
 import pandas as pd
-import matplotlib.pyplot as plt
-import seaborn as sns
+import plotly.express as px
 
-# Title for your Streamlit app
-st.title('Data Manipulation and Visualization with Streamlit')
+# Load data from a CSV file (place your data in the 'data/' directory)
+@st.cache  # Cache the loaded data to improve performance
+def load_data():
+    data = pd.read_csv("data/sample_data.csv")  # Adjust the file name as needed
+    return data
 
-# Upload a CSV file
-uploaded_file = st.file_uploader("Upload a CSV file", type=["csv"])
+# Create a Streamlit app
+def main():
+    st.title("Sample Streamlit Data Visualization")
+    st.sidebar.header("Settings")
 
-# Check if a file is uploaded
-if uploaded_file is not None:
-    # Load the data into a DataFrame
-    df = pd.read_csv(uploaded_file)
+    # Load the data
+    data = load_data()
 
-    # Display the raw data
-    st.subheader("Raw Data")
-    st.write(df)
+    # Sidebar options for data manipulation
+    st.sidebar.subheader("Data Manipulation")
+    selected_column = st.sidebar.selectbox("Select a column:", data.columns)
+    
+    # Filter the data based on user selection
+    filtered_data = data[data[selected_column] > st.sidebar.slider(f"Filter by {selected_column}", min_value=0, max_value=data[selected_column].max())]
 
-    # Data manipulation
-    st.subheader("Data Manipulation")
+    # Display the filtered data
+    st.subheader("Filtered Data")
+    st.write(filtered_data)
 
-    # Select columns for manipulation
-    selected_columns = st.multiselect("Select Columns", df.columns)
+    # Data visualization
+    st.subheader("Data Visualization")
+    chart_type = st.selectbox("Select a chart type:", ["Bar Chart", "Scatter Plot"])
+    
+    if chart_type == "Bar Chart":
+        st.write("### Bar Chart")
+        fig = px.bar(data, x="Category", y="Sales", title="Sales by Category")
+        st.plotly_chart(fig)
 
-    if selected_columns:
-        # Filter the DataFrame based on selected columns
-        filtered_df = df[selected_columns]
+    elif chart_type == "Scatter Plot":
+        st.write("### Scatter Plot")
+        fig = px.scatter(data, x="Profit", y="Sales", color="Category", title="Profit vs. Sales")
+        st.plotly_chart(fig)
 
-        # Display the filtered data
-        st.write(filtered_df)
-
-        # Calculate summary statistics
-        st.subheader("Summary Statistics")
-        st.write(filtered_df.describe())
-
-        # Data visualization
-        st.subheader("Data Visualization")
-
-        # Choose a type of chart
-        chart_type = st.selectbox("Select a Chart Type", ["Bar Chart", "Histogram"])
-
-        if chart_type == "Bar Chart":
-            # Group data by one of the selected columns and count occurrences
-            group_column = st.selectbox("Select a Column for Grouping", selected_columns)
-            if group_column:
-                chart_data = filtered_df[group_column].value_counts()
-                st.bar_chart(chart_data)
-
-        elif chart_type == "Histogram":
-            # Select a column for the histogram
-            hist_column = st.selectbox("Select a Column for Histogram", selected_columns)
-            if hist_column:
-                st.set_option('deprecation.showPyplotGlobalUse', False)
-                sns.histplot(filtered_df[hist_column], kde=True)
-                plt.xlabel(hist_column)
-                plt.ylabel("Frequency")
-                st.pyplot()
-
-# Add some explanation or instructions
-#st.markdown("### Instructions:")
-#st.markdown(""C:\Users\genesis.villagracia\Downloads\veg_plant_height.csv"")
-#st.markdown("plant_name")
-#st.markdown("- Choose a chart type for visualization.")
-
-# Footer
-st.text("Sample Streamlit App for Data Manipulation and Visualization")
-
+if __name__ == "__main__":
+    main()
