@@ -12,13 +12,13 @@ st.markdown('<style>div.block-container{padding-top:1rem;}</style>', unsafe_allo
 # File upload
 fl = st.file_uploader(":file_folder: Upload a file", type=(["csv","txt","xlsx","xls"]))
 
-if fl is not None:
-    filename = fl.name
-    st.write(filename)
-    st.dataframe = pd.read_xlsx(filename)
-else:
-    os.chdir(r"C:\Users\genesis.villagracia\Downloads")
-    st.dataframe = pd.read_xlsx("Sample - Superstore.xlsx")
+#if fl is not None:
+   # filename = fl.name
+    #st.write(filename)
+   # st.dataframe = pd.read_xlsx(filename)
+#else:
+   # os.chdir(r"C:\Users\genesis.villagracia\Downloads")
+    #st.dataframe = pd.read_xlsx("Sample - Superstore.xlsx")
 
 
 #Defines Columns  
