@@ -22,7 +22,7 @@ else:
 
 
 #Defines Columns  
-col1,col2 = st.columns ((2))
+col1,col2 = st.columns (2)
 df["Order_Date"] = pd.to_datetime(df["Order Date"])
 
 
