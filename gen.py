@@ -12,6 +12,12 @@ st.markdown('<style>div.block-container{padding-top:1rem;}</style>', unsafe_allo
 # File upload
 fl = st.file_uploader(":file_folder: Upload a file", type=(["csv","txt","xlsx","xls"]))
 fl = fl.set_index('plant_name')
+# Let's put a pick list here so they can pick the fruit they want to include 
+Plant_selected = st.multiselect("Pick some fruits:", list(fl.index))
+Plant_to_show = fl.loc[fruits_selected]
+
+
+
 #Display table
 st.dataframe(fl)
 
