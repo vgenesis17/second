@@ -11,3 +11,11 @@ st.markdown('<style>div.block-container{padding-top:1rem;}</style>', unsafe_allo
 
 # File upload
 fl = st.file_uploader(":file_folder: Upload a file", type=(["csv","txt","xlsx","xls"]))
+
+if fl is not None:
+    filename = fl.name
+    st.write(filename)
+    df = pd.read_csv(filename)
+else:
+    os.chdir(r"C:\Users\genesis.villagracia\Downloads")
+    df = pd.read_csv("veg_plant_height.csv")
