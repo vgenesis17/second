@@ -16,7 +16,7 @@ fl = fl.set_index('plant_name')
 Plant_selected = st.multiselect("Pick some plants:", list(fl.index),['Avocado','Strawberries'])
 Plants_to_show = fl.loc[Plant_selected]
 #Display table
-st.dataframe(fl)
+st.dataframe(Plants_to_show)
 
 
 
