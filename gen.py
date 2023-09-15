@@ -12,7 +12,10 @@ st.markdown('<style>div.block-container{padding-top:1rem;}</style>', unsafe_allo
 
 # File upload
 fl = st.file_uploader(":file_folder: Upload a file", type=(["csv","txt","xlsx","xls"]))
-fl = fl.set_index('plant_name')
+
+
+fls = pandas.read_csv(fl)
+fls = fl.set_index('plant_name')
 #Display table
 #st.dataframe(fl)
 
